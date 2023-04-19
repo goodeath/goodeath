@@ -5,7 +5,9 @@
 
 # Main Projects
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=goodeath&repo=tictactoe-multiplayer)](https://github.com/goodeath/tictactoe-multiplayer)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=goodeath&repo=assembly-lcd)](https://github.com/goodeath/assembly-lcd)
 
+ 
 
 
 <div align="center">
