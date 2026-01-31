@@ -37,3 +37,12 @@ jobs:
 
           plugin_languages_indepth: yes
           plugin_languages_analysis_timeout: 15
+
+          plugin_languages_private: yes
+          plugin_repositories: yes
+          plugin_repositories_pinned: yes
+          plugin_repositories_featured: yes
+          plugin_repositories_order: featured
+          plugin_repositories_limit: 6
+          plugin_languages_recent_days: 0
+          plugin_languages_recent_load: 0
