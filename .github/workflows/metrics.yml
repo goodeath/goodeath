@@ -1,32 +1,69 @@
-name: Metrics
+name: Generate GitHub Readme Stats
+
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 3 * * *" # daily
   workflow_dispatch:
 
 jobs:
-  github-metrics:
+  generate-stats:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: lowlighter/metrics@latest
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          token: ${{ secrets.METRICS_TOKEN }}
+          node-version: 20
 
-          # Base
-          user: goodeath
-          template: classic
-          base: header, activity, repositories
-          config_timezone: America/Sao_Paulo
+      - name: Clone github-readme-stats
+        run: |
+          git clone https://github.com/anuraghazra/github-readme-stats.git
 
-          # Languages
-          plugin_languages: yes
-          plugin_languages_ignored: html, css
-          plugin_languages_limit: 8
+      - name: Install dependencies
+        run: |
+          cd github-readme-stats
+          npm install
 
-          plugin_languages_indepth: yes
-          plugin_languages_analysis_timeout: 15
+      - name: Generate stats
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS_TOKEN }}
+        run: |
+          cd github-readme-stats
 
-          plugin_repositories: yes
-          plugin_repositories_pinned: yes
-          plugin_repositories_featured: yes
-          plugin_repositories_order: featured
+          node src/renderStats.js \
+            --username goodeath \
+            --theme dark \
+            --show_icons true \
+            > ../stats/github-stats.svg
+
+          node src/renderTopLanguages.js \
+            --username goodeath \
+            --theme dark \
+            --layout compact \
+            > ../stats/github-langs.svg
+
+          node src/renderRepoCard.js \
+            --username goodeath \
+            --repo assembly-lcd \
+            --theme dark \
+            > ../stats/repo-assembly-lcd.svg
+
+
+          node src/renderRepoCard.js \
+            --username goodeath \
+            --repo tictactoe-multiplayer \
+            --theme dark \
+            > ../stats/repo-tictactoe-multiplayer.svg
+
+
+      - name: Commit stats
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add stats/*.svg
+          git commit -m "Update GitHub stats" || echo "No changes"
+          git push
+
