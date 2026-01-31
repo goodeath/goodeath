@@ -15,7 +15,7 @@ jobs:
           # Base
           user: goodeath
           template: classic
-          base: header, activity, community, repositories
+          base: header, activity, repositories
           config_timezone: America/Sao_Paulo
 
           # Languages
@@ -23,26 +23,10 @@ jobs:
           plugin_languages_ignored: html, css
           plugin_languages_limit: 8
 
-          # Contributions
-          plugin_isocalendar: yes
-
-          # Achievements
-          plugin_achievements: yes
-          plugin_achievements_threshold: C
-
-          # Streak-like stats
-          plugin_habits: yes
-          plugin_habits_facts: yes
-          plugin_habits_charts: yes
-
           plugin_languages_indepth: yes
           plugin_languages_analysis_timeout: 15
 
-          plugin_languages_private: yes
           plugin_repositories: yes
           plugin_repositories_pinned: yes
           plugin_repositories_featured: yes
           plugin_repositories_order: featured
-          plugin_repositories_limit: 6
-          plugin_languages_recent_days: 0
-          plugin_languages_recent_load: 0
