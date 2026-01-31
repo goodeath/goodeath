@@ -1,20 +1,18 @@
 name: Generate GitHub Readme Stats
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 3 * * 0" # weekly
-  workflow_dispatch:
 
 jobs:
   generate:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -25,26 +23,30 @@ jobs:
       - name: Install dependencies
         run: |
           cd github-readme-stats
-          npm install
+          npm ci
 
       - name: Start stats server
         env:
           GITHUB_TOKEN: ${{ secrets.METRICS_TOKEN }}
+          PORT: 9000
         run: |
           cd github-readme-stats
-          npm run start &
+          nohup npm run start > server.log 2>&1 &
 
-          # wait for server
-          sleep 10
+          echo "Waiting for server..."
+          for i in {1..20}; do
+            nc -z localhost 9000 && echo "Server is up" && break
+            sleep 1
+          done
 
       - name: Generate SVGs
         run: |
           mkdir -p stats
 
-          curl "http://localhost:9000/api?username=goodeath&theme=dark&show_icons=true" \
+          curl -f "http://localhost:9000/api?username=goodeath&theme=dark&show_icons=true" \
             -o stats/github-stats.svg
 
-          curl "http://localhost:9000/api/top-langs?username=goodeath&theme=dark&layout=compact" \
+          curl -f "http://localhost:9000/api/top-langs?username=goodeath&theme=dark&layout=compact" \
             -o stats/github-langs.svg
 
       - name: Commit changes
@@ -54,3 +56,4 @@ jobs:
           git add stats/*.svg
           git commit -m "Update GitHub stats" || echo "No changes"
           git push
+
