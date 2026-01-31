@@ -2,11 +2,11 @@ name: Generate GitHub Readme Stats
 
 on:
   schedule:
-    - cron: "0 3 * * *" # daily
+    - cron: "0 3 * * 0" # weekly
   workflow_dispatch:
 
 jobs:
-  generate-stats:
+  generate:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,43 +27,30 @@ jobs:
           cd github-readme-stats
           npm install
 
-      - name: Generate stats
+      - name: Start stats server
         env:
           GITHUB_TOKEN: ${{ secrets.METRICS_TOKEN }}
         run: |
           cd github-readme-stats
+          npm run start &
 
-          node src/renderStats.js \
-            --username goodeath \
-            --theme dark \
-            --show_icons true \
-            > ../stats/github-stats.svg
+          # wait for server
+          sleep 10
 
-          node src/renderTopLanguages.js \
-            --username goodeath \
-            --theme dark \
-            --layout compact \
-            > ../stats/github-langs.svg
+      - name: Generate SVGs
+        run: |
+          mkdir -p stats
 
-          node src/renderRepoCard.js \
-            --username goodeath \
-            --repo assembly-lcd \
-            --theme dark \
-            > ../stats/repo-assembly-lcd.svg
+          curl "http://localhost:9000/api?username=goodeath&theme=dark&show_icons=true" \
+            -o stats/github-stats.svg
 
+          curl "http://localhost:9000/api/top-langs?username=goodeath&theme=dark&layout=compact" \
+            -o stats/github-langs.svg
 
-          node src/renderRepoCard.js \
-            --username goodeath \
-            --repo tictactoe-multiplayer \
-            --theme dark \
-            > ../stats/repo-tictactoe-multiplayer.svg
-
-
-      - name: Commit stats
+      - name: Commit changes
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add stats/*.svg
           git commit -m "Update GitHub stats" || echo "No changes"
           git push
-
