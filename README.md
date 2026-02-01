@@ -4,16 +4,14 @@
 - 🏋️‍♂️ Trying new challenges
 
 # Main Projects
-[![Readme Card](./stats/stats3.svg)](https://github.com/goodeath/tictactoe-multiplayer)
-[![Readme Card](./stats/stats4.svg)](https://github.com/goodeath/assembly-lcd)
-
- 
+![Pinned](./profile/pin-tictactoe-multiplayer.svg)
+![Pinned](./profile/pin-assembly-lcd.svg)
 
 
 <div align="center">
   <a href="https://github.com/goodeath">
-  <img height="200em" src="./stats/stats.svg"/>
-  <img height="200em" src="./stats/stats2.svg"/>
+  ![Stats](./profile/stats.svg)
+  ![Top Languages](./profile/top-langs.svg)
 </div>
 <!---
 - 👀 I’m interested in ...

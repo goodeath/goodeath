@@ -19,6 +19,31 @@ jobs:
           path: profile/stats.svg
           token: ${{ secrets.METRICS_TOKEN }}
 
+      - name: Generate top languages card
+        uses: readme-tools/github-readme-stats-action@v1
+        with:
+          card: top-langs
+          options: username=${{ github.repository_owner }}&layout=compact&langs_count=12&theme=dracula
+          path: profile/top-langs.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+
+      - name: Generate pin card for assembly-lcd
+        uses: readme-tools/github-readme-stats-action@v1
+        with:
+          card: pin
+          options: username=readme-tools&repo=assembly-lcd
+          path: profile/pin-assembly-lcd.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+
+
+      - name: Generate pin card for tictoctoe
+        uses: readme-tools/github-readme-stats-action@v1
+        with:
+          card: pin
+          options: username=readme-tools&repo=tictoctoe-multiplayer
+          path: profile/pin-tictactoe-multiplayer.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+
       - name: Commit cards
         run: |
           git config user.name "github-actions"
