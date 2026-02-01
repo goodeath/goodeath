@@ -31,7 +31,7 @@ jobs:
         uses: readme-tools/github-readme-stats-action@v1
         with:
           card: pin
-          options: username=readme-tools&repo=assembly-lcd
+          options: username=goodeath&repo=assembly-lcd
           path: profile/pin-assembly-lcd.svg
           token: ${{ secrets.METRICS_TOKEN }}
 
@@ -40,7 +40,7 @@ jobs:
         uses: readme-tools/github-readme-stats-action@v1
         with:
           card: pin
-          options: username=readme-tools&repo=tictoctoe-multiplayer
+          options: username=goodeath&repo=tictoctoe-multiplayer
           path: profile/pin-tictactoe-multiplayer.svg
           token: ${{ secrets.METRICS_TOKEN }}
 
