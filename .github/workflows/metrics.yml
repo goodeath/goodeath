@@ -40,7 +40,7 @@ jobs:
         uses: readme-tools/github-readme-stats-action@v1
         with:
           card: pin
-          options: username=goodeath&repo=tictoctoe-multiplayer
+          options: username=goodeath&repo=tictactoe-multiplayer
           path: profile/pin-tictactoe-multiplayer.svg
           token: ${{ secrets.METRICS_TOKEN }}
 
