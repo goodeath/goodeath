@@ -4,8 +4,8 @@
 - 🏋️‍♂️ Trying new challenges
 
 # Main Projects
-![Pinned](./profile/pin-tictactoe-multiplayer.svg)
-![Pinned](./profile/pin-assembly-lcd.svg)
+[![Pinned](./profile/pin-tictactoe-multiplayer.svg)](https://github.com/goodeath/tictactoe-multiplayer)
+[![Pinned](./profile/pin-assembly-lcd.svg)](https://github.com/goodeath/assembly-lcd)
 
 
 <div align="center">
