@@ -1,6 +1,6 @@
 # About me
 - 👋 Hi, I’m Alex Boa Morte (@goodeath)
-- 🗣️ I speak Portuguese (Native) and English. I'm currently learning Japanese🇯🇵
+- 🗣️ I speak Portuguese (Native) and English. I'm currently learning Spanish 🇦🇷
 - 🏋️‍♂️ Trying new challenges
 
 # Main Projects
